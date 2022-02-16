@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Андрей Саенков](https://up.htmlacademy.ru/javascript/25/user/1892387).
-* Наставник: `Неизвестно`.
+* Наставник: [Магомед Кандаев](https://htmlacademy.ru/profile/magomedkandaev).
 
 ---
 

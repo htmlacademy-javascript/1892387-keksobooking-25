@@ -33,7 +33,6 @@ const getRandomArray = (arr) => {
   return array;
 };
 
-
 const TYPE = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 const CHECKOUT = ['12:00', '13:00', '14:00'];
 const FEATURES = ['wifi', 'dishwasher', 'parking', 'washer', 'elevator', 'conditioner'];
@@ -49,39 +48,32 @@ const getImageNumber = () => {
   return imgNumber < 10 ? `0${imgNumber}` : imgNumber;
 };
 
-const createLocation = () => ({
-  lat: getRandomFloat(35.65000, 35.70000, 5),
-  lng: getRandomFloat(139.70000, 139.80000, 5)
-});
-
-const createAuthor = function () {
+const createCard = () => {
+  const lat = getRandomFloat(35.65000, 35.70000, 5);
+  const lng = getRandomFloat(139.70000, 139.80000, 5);
   return {
-    avatar: `img/avatars/user${getImageNumber()}.png`,
+    author: {
+      avatar: `img/avatars/user${getImageNumber()}.png`,
+    },
+    offer: {
+      title: 'ЗАГОЛОВОК ПРЕДЛОЖЕНИЯ',
+      address: `${lat}, ${lng}`,
+      price: getRandomInteger(1000, 10000),
+      type: TYPE[getRandomInteger(0, 4)],
+      rooms: getRandomInteger(1, 5),
+      guests: getRandomInteger(1, 6),
+      checkin: CHECKOUT[getRandomInteger(0, 2)],
+      checkout: CHECKOUT[getRandomInteger(0, 2)],
+      features: getRandomArray(FEATURES),
+      description: 'Очень хорошее помещение',
+      photos: getRandomArray(PHOTOS),
+    },
+    location: {
+      lat: lat,
+      lng: lng,
+    }
   };
 };
-
-const createOffer = function () {
-  return {
-    title: 'ЗАГОЛОВОК ПРЕДЛОЖЕНИЯ',
-    address: createLocation(),
-    price: getRandomInteger(1000, 10000),
-    type: TYPE[getRandomInteger(0, 4)],
-    rooms: getRandomInteger(1, 5),
-    guests: getRandomInteger(1, 6),
-    checkin: CHECKOUT[getRandomInteger(0, 2)],
-    checkout: CHECKOUT[getRandomInteger(0, 2)],
-    features: getRandomArray(FEATURES),
-    description: 'Очень хорошее помещение',
-    photos: getRandomArray(PHOTOS),
-  };
-};
-
-
-const createCard = () => ({
-  location: createLocation(),
-  offer: createOffer(),
-  author: createAuthor(),
-});
 
 const createCardsArray = (quantity) => Array.from({length: quantity}, createCard);
 

@@ -4,8 +4,6 @@ const getRandomInteger = (x, y) => {
   return Math.floor(Math.random() * (upper - lower + 1) + lower);
 };
 
-getRandomInteger(1,110);
-
 const getRandomFloat = (x, y, digitsNumber = 0) => {
   if (x < 0 || y < 0) {
     throw new Error('Отрицательный параметр');
@@ -17,23 +15,10 @@ const getRandomFloat = (x, y, digitsNumber = 0) => {
   return Math.floor((Math.random() * (y - x) + x) * digitsDegree) / digitsDegree;
 };
 
-getRandomFloat(1.1234, 50.4321, 3);
+const getRandomArray = (elements) => elements.sort(() => Math.random() - 0.5).slice(0, getRandomInteger(1, elements.length));
 
-// const getRandomArray = (arr) => {
-//   const maxLength = arr.length;
-//   const arrayLength = getRandomInteger(1, maxLength);
-//   const array = [];
-//   while (array.length < arrayLength) {
-//     const elementIndex = getRandomInteger(0, maxLength - 1);
-//     const element = arr[elementIndex];
-//     if (!array.includes(element)) {
-//       array.push(element);
-//     }
-//   }
-//   return array;
-// };
+const getRandomElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-const getRandomArray = (initialArray) => initialArray.sort(() => Math.random() - 0.5).slice(0, getRandomInteger(1, initialArray.length));
 
 const TYPES = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
 const CHECKOUTS = ['12:00', '13:00', '14:00'];
@@ -43,22 +28,28 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
-const cardQuantity = 10;
-const latMin = 35.65000;
-const latMax = 35.70000;
-const lngMin = 139.70000;
-const lngMax = 139.80000;
-const maxDigits = 5;
-const usersId = Array.from({length: cardQuantity},(v, i) => ++i);
+const CARD_QUANTITY = 10;
+const LAT_MIN = 35.65000;
+const LAT_MAX = 35.70000;
+const LNG_MIN = 139.70000;
+const LNG_MAX = 139.80000;
+const MAX_DIGITS = 5;
+const PRICE_MIN = 1000;
+const PRICE_MAX = 10000;
+const ROOMS_MIN = 1;
+const ROOMS_MAX = 5;
+const GUESTS_MIN = 1;
+const GUESTS_MAX = 6;
+const usersIds = Array.from({length: CARD_QUANTITY},(v, i) => ++i);
 
 const getImageNumber = () => {
-  const imgNumber = usersId.splice(0, 1);
+  const imgNumber = usersIds.splice(0, 1);
   return imgNumber < 10 ? `0${imgNumber}` : imgNumber;
 };
 
 const createCard = () => {
-  const lat = getRandomFloat(latMin, latMax, maxDigits);
-  const lng = getRandomFloat(lngMin, lngMax, maxDigits);
+  const lat = getRandomFloat(LAT_MIN, LAT_MAX, MAX_DIGITS);
+  const lng = getRandomFloat(LNG_MIN, LNG_MAX, MAX_DIGITS);
   return {
     author: {
       avatar: `img/avatars/user${getImageNumber()}.png`,
@@ -66,12 +57,12 @@ const createCard = () => {
     offer: {
       title: 'ЗАГОЛОВОК ПРЕДЛОЖЕНИЯ',
       address: `${lat}, ${lng}`,
-      price: getRandomInteger(1000, 10000),
-      type: TYPES[getRandomInteger(0, 4)],
-      rooms: getRandomInteger(1, 5),
-      guests: getRandomInteger(1, 6),
-      checkin: CHECKOUTS[getRandomInteger(0, 2)],
-      checkout: CHECKOUTS[getRandomInteger(0, 2)],
+      price: getRandomInteger(PRICE_MIN, PRICE_MAX),
+      type: getRandomElement(TYPES),
+      rooms: getRandomInteger(ROOMS_MIN, ROOMS_MAX),
+      guests: getRandomInteger(GUESTS_MIN, GUESTS_MAX),
+      checkin: getRandomElement(CHECKOUTS),
+      checkout: getRandomElement(CHECKOUTS),
       features: getRandomArray(FEATURES),
       description: 'Очень хорошее помещение',
       photos: getRandomArray(PHOTOS),
@@ -85,4 +76,4 @@ const createCard = () => {
 
 const createCards = (quantity) => Array.from({length: quantity}, createCard);
 
-createCards(cardQuantity);
+createCards(CARD_QUANTITY);

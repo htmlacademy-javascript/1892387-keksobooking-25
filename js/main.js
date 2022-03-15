@@ -1,3 +1,1 @@
-import {CARD_QUANTITY, createCards} from './data';
-
-createCards(CARD_QUANTITY);
+import './card_generate.js';

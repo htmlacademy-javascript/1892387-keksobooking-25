@@ -1,5 +1,4 @@
-import {CARD_QUANTITY} from './data';
-
+const CARD_QUANTITY = 1;
 const getRandomInteger = (x, y) => {
   const lower = Math.ceil(Math.min(Math.abs(x), Math.abs(y)));
   const upper = Math.floor(Math.max(Math.abs(x), Math.abs(y)));
@@ -29,4 +28,4 @@ const getImageNumber = () => {
   return imgNumber < 10 ? `0${imgNumber}` : imgNumber;
 };
 
-export {getRandomInteger, getRandomFloat, getRandomArray, getRandomElement, getImageNumber};
+export {getRandomInteger, getRandomFloat, getRandomArray, getRandomElement, getImageNumber, CARD_QUANTITY};

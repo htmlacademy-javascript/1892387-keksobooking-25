@@ -8,7 +8,6 @@ const PHOTOS = [
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg',
   'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'
 ];
-const CARD_QUANTITY = 10;
 const LAT_MIN = 35.65000;
 const LAT_MAX = 35.70000;
 const LNG_MIN = 139.70000;
@@ -50,4 +49,4 @@ const createCard = () => {
 
 const createCards = (quantity) => Array.from({length: quantity}, createCard);
 
-export {CARD_QUANTITY, createCards};
+export {createCards, createCard};

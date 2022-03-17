@@ -49,4 +49,4 @@ const createCard = () => {
 
 const createCards = (quantity) => Array.from({length: quantity}, createCard);
 
-export {createCards};
+export {createCards, createCard};

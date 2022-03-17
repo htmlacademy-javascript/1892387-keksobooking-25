@@ -1,4 +1,4 @@
-const formDisabled = (formClass) => {
+const getFormDisable = (formClass) => {
   const form = document.querySelector(formClass);
   form.classList.add('ad-form--disabled');
   const interactiveComponents = form.children;
@@ -7,7 +7,7 @@ const formDisabled = (formClass) => {
   }
 };
 
-const formActive = (formClass) => {
+const getFormActive = (formClass) => {
   const form = document.querySelector(formClass);
   form.classList.remove('ad-form--disabled');
   const interactiveComponents = form.children;
@@ -16,4 +16,4 @@ const formActive = (formClass) => {
   }
 };
 
-export {formDisabled, formActive};
+export {getFormDisable, getFormActive};

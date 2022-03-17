@@ -1,9 +1,5 @@
-import {createCards} from './data.js';
-import {CARD_QUANTITY} from './util.js';
-
 const mapElement = document.querySelector('#map-canvas');
 const cardTemplate = document.querySelector('#card').content.querySelector('.popup');
-const similarCards = createCards(CARD_QUANTITY);
 const getOfferType = (type) => {
   switch (type) {
     case 'flat':
@@ -21,7 +17,7 @@ const getOfferType = (type) => {
   }
 };
 
-similarCards.forEach((element) => {
+const getGeneratedCard = (element) => {
   const cardElement = cardTemplate.cloneNode(true);
   // Заголовок
   cardElement.querySelector('.popup__title').textContent = element.offer.title;
@@ -39,15 +35,16 @@ similarCards.forEach((element) => {
   // Удобства
   const featuresList = cardElement.querySelectorAll('.popup__feature');
   const cardFeatures = element.offer.features;
-  featuresList.forEach((featuresListItem) => {
-    const isNecessary = cardFeatures.some(
-      (feature) => featuresListItem.classList.contains(`popup__feature--${  feature}`),);
-    if (!isNecessary) {
-      featuresListItem.remove();
-    }
-  });
   if (cardFeatures.length === 0) {
     cardElement.querySelector('.popup__features').remove();
+  } else {
+    featuresList.forEach((featuresListItem) => {
+      const isNecessary = cardFeatures.some(
+        (feature) => featuresListItem.classList.contains(`popup__feature--${feature}`),);
+      if (!isNecessary) {
+        featuresListItem.remove();
+      }
+    });
   }
   // Описание
   cardElement.querySelector('.popup__description').textContent = element.offer.description;
@@ -58,16 +55,19 @@ similarCards.forEach((element) => {
   const cardPhotos = element.offer.photos;
   const photosList = cardElement.querySelector('.popup__photos');
   const photoTemplate = photosList.querySelector('.popup__photo');
-  cardPhotos.forEach((photo) => {
-    photoTemplate.remove();
-    const newPhoto = photoTemplate.cloneNode();
-    newPhoto.setAttribute('src', photo);
-    photosList.appendChild(newPhoto);
-  });
   if (cardPhotos.length === 0) {
     photosList.remove();
+  } else {
+    cardPhotos.forEach((photo) => {
+      photoTemplate.remove();
+      const newPhoto = photoTemplate.cloneNode();
+      newPhoto.setAttribute('src', photo);
+      photosList.appendChild(newPhoto);
+    });
   }
   // Аватар
   cardElement.querySelector('.popup__avatar').setAttribute('src', element.author.avatar);
   mapElement.appendChild(cardElement);
-});
+};
+
+export {getGeneratedCard};

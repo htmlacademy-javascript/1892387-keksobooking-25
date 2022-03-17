@@ -1,4 +1,4 @@
-const CARD_QUANTITY = 1;
+const CARD_QUANTITY = 10;
 const getRandomInteger = (x, y) => {
   const lower = Math.ceil(Math.min(Math.abs(x), Math.abs(y)));
   const upper = Math.floor(Math.max(Math.abs(x), Math.abs(y)));

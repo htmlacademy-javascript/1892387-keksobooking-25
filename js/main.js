@@ -1,5 +1,12 @@
-import {formDisabled, formActive} from './form.js';
+import {createCards, createCard} from './data.js';
+import {getFormDisable, getFormActive} from './form.js';
+import {getGeneratedCard} from './card_generate.js';
+import {CARD_QUANTITY} from './util.js';
 
-formDisabled('.ad-form');
-formDisabled('.map__filters');
-formActive('.ad-form');
+const testCard = createCard();
+
+createCards(CARD_QUANTITY);
+getGeneratedCard(testCard);
+getFormDisable('.ad-form');
+getFormDisable('.map__filters');
+getFormActive('.ad-form');

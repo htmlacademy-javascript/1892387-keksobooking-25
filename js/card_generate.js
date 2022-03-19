@@ -28,7 +28,7 @@ const getGeneratedCard = (element) => {
   // тип жилья
   const cardType = element.offer.type;
   cardElement.querySelector('.popup__type').textContent = getOfferType(cardType);
-  // Количество комнат/жильцов
+  // Количество комнат/гостей
   cardElement.querySelector('.popup__text--capacity').textContent = `${element.offer.rooms} комнаты для ${element.offer.guests}`;
   // Заезд/выезд
   cardElement.querySelector('.popup__text--time').textContent = `Заезд после ${element.offer.checkin}, выезд до ${element.offer.checkout}`;

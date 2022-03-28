@@ -14,8 +14,7 @@ const pristine = new Pristine(form, {
   errorTextClass: 'ad-form__error-text',
 }, false);
 
-const validateRoomsAndGuests = () => capacityOptions[roomNumber.value].includes(roomCapacity.value)
-
+const validateRoomsAndGuests = () => capacityOptions[roomNumber.value].includes(roomCapacity.value);
 
 pristine.addValidator(
   roomNumber,

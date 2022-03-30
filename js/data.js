@@ -19,6 +19,19 @@ const ROOMS_MIN = 1;
 const ROOMS_MAX = 5;
 const GUESTS_MIN = 1;
 const GUESTS_MAX = 6;
+const capacityOptions = {
+  '1': ['1'],
+  '2': ['1', '2'],
+  '3': ['1', '2', '3'],
+  '100': ['0']
+};
+const costOptions = {
+  'palace': '10000',
+  'flat': '1000',
+  'house': '5000',
+  'bungalow': '0',
+  'hotel': '3000'
+};
 
 const createCard = () => {
   const lat = getRandomFloat(LAT_MIN, LAT_MAX, MAX_DIGITS);
@@ -49,4 +62,4 @@ const createCard = () => {
 
 const createCards = (quantity) => Array.from({length: quantity}, createCard);
 
-export {createCards, createCard};
+export {createCards, createCard, capacityOptions, costOptions};

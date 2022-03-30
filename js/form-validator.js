@@ -13,7 +13,7 @@ const pristine = new Pristine(form, {
 }, false);
 
 const validateRoomsAndGuests = () => capacityOptions[roomNumber.value].includes(roomCapacity.value);
-const validateCost = () => roomCost.value >= costOptions[roomType.value];
+const validateCost = () => parseInt(roomCost.value, 10) >= parseInt(costOptions[roomType.value], 10);
 const getValidateCostErrorMessage = () => `Минимальная цена за данный тип жилья ${costOptions[roomType.value]}`;
 
 pristine.addValidator(

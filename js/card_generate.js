@@ -29,7 +29,17 @@ const getGeneratedCard = (element) => {
   const cardType = element.offer.type;
   cardElement.querySelector('.popup__type').textContent = getOfferType(cardType);
   // Количество комнат/гостей
-  cardElement.querySelector('.popup__text--capacity').textContent = `${element.offer.rooms} комнаты для ${element.offer.guests}`;
+  let roomsAvailable = 'комнаты для';
+  if (element.offer.rooms === 1) {
+    roomsAvailable = 'комната для';
+  } if (element.offer.rooms === 5) {
+    roomsAvailable = 'комнат для';
+  }
+  let guestCapacity = 'гостей';
+  if (element.offer.guests === 1) {
+    guestCapacity = 'гостя';
+  }
+  cardElement.querySelector('.popup__text--capacity').textContent = `${element.offer.rooms} ${roomsAvailable} ${element.offer.guests} ${guestCapacity}`;
   // Заезд/выезд
   cardElement.querySelector('.popup__text--time').textContent = `Заезд после ${element.offer.checkin}, выезд до ${element.offer.checkout}`;
   // Удобства
@@ -68,6 +78,7 @@ const getGeneratedCard = (element) => {
   // Аватар
   cardElement.querySelector('.popup__avatar').setAttribute('src', element.author.avatar);
   mapElement.appendChild(cardElement);
+  return cardElement;
 };
 
 export {getGeneratedCard};

@@ -4,7 +4,7 @@ const slider = document.querySelector('.ad-form__slider');
 noUiSlider.create(slider, {
   start: [5000],
   connect: [true, false],
-  tooltips: true,
+  tooltips: false,
   step: 100,
   range: {
     'min': [0],
@@ -15,7 +15,7 @@ noUiSlider.create(slider, {
   }
 });
 
-slider.noUiSlider.on('change', (values, handle) => {
+slider.noUiSlider.on('update', (values, handle) => {
   price.value = Math.floor(values[handle]);
 });
 

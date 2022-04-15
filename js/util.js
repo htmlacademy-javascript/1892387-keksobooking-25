@@ -1,31 +1,26 @@
-const CARD_QUANTITY = 10;
-const getRandomInteger = (x, y) => {
-  const lower = Math.ceil(Math.min(Math.abs(x), Math.abs(y)));
-  const upper = Math.floor(Math.max(Math.abs(x), Math.abs(y)));
-  return Math.floor(Math.random() * (upper - lower + 1) + lower);
+const ERROR_TIME = 5000;
+const submitButton = document.querySelector('.ad-form__submit');
+
+const blockSubmitButton = () => {
+  submitButton.disabled = true;
+  submitButton.textContent = 'Отправляю...';
 };
 
-const getRandomFloat = (x, y, digitsNumber = 0) => {
-  if (x < 0 || y < 0) {
-    throw new Error('Отрицательный параметр');
-  }
-  const digitsDegree = 10 ** digitsNumber;
-  if (x > y) {
-    [x, y] = [y, x];
-  }
-  return Math.floor((Math.random() * (y - x) + x) * digitsDegree) / digitsDegree;
+const unblockSubmitButton = () => {
+  submitButton.disabled = false;
+  submitButton.textContent = 'Опубликовать';
 };
 
-const getRandomArray = (elements) => elements.sort(() => Math.random() - 0.5).slice(0, getRandomInteger(1, elements.length));
+const showError = (error) => {
+  const errorContainer = document.createElement('div');
+  errorContainer.classList.add('error-container');
+  errorContainer.textContent = error;
 
-const getRandomElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
+  document.body.append(errorContainer);
 
-
-const usersIds = Array.from({length: CARD_QUANTITY},(v, i) => ++i);
-
-const getImageNumber = () => {
-  const imgNumber = usersIds.splice(0, 1);
-  return imgNumber < 10 ? `0${imgNumber}` : imgNumber;
+  setTimeout(() => {
+    errorContainer.remove();
+  }, ERROR_TIME);
 };
 
-export {getRandomInteger, getRandomFloat, getRandomArray, getRandomElement, getImageNumber, CARD_QUANTITY};
+export {showError, blockSubmitButton, unblockSubmitButton};

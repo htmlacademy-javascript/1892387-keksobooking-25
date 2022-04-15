@@ -1,8 +1,5 @@
 import {getFormDisable, getFormActive} from './form.js';
-import {createCards} from './data.js';
-import {CARD_QUANTITY} from './util.js';
 import {getGeneratedCard} from './card_generate.js';
-const createdCards = createCards(CARD_QUANTITY);
 
 const address = document.querySelector('#address');
 
@@ -47,6 +44,8 @@ const mainMarker = L.marker(
   },
 );
 
+const markerGroup = L.layerGroup().addTo(map);
+
 mainMarker.addTo(map);
 
 const createdMarker = (point) => {
@@ -61,11 +60,9 @@ const createdMarker = (point) => {
     }
   );
   addMarker
-    .addTo(map)
+    .addTo(markerGroup)
     .bindPopup(getGeneratedCard(point));
 };
-
-createdCards.forEach(createdMarker);
 
 const getCoordinates = (lat, lng) => {
   address.value = `${lat} ${lng}`;
@@ -79,3 +76,4 @@ mainMarker.on('moveend', (evt) => {
   getCoordinates(lat, lng);
 });
 
+export {createdMarker};

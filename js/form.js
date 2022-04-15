@@ -1,3 +1,10 @@
+import {marker, adForm} from './map.js';
+
+const avatar = document.querySelector('#avatar');
+const preview = document.querySelector('.ad-form-header__preview');
+const avatarImg = preview.querySelector('img');
+const photos = document.querySelector('#images');
+
 const getFormDisable = (formClass) => {
   const form = document.querySelector(formClass);
   form.classList.add('ad-form--disabled');
@@ -16,4 +23,17 @@ const getFormActive = (formClass) => {
   }
 };
 
-export {getFormDisable, getFormActive};
+const resetForm = () => {
+  adForm.reset();
+  avatar.files.value = 'img/muffin-grey.svg';
+  avatarImg.src = 'img/muffin-grey.svg';
+  photos.files.value = '';
+  const userPhotos = document.querySelectorAll('.photo');
+  userPhotos.forEach((element) => element.remove());
+  marker.setLatLng({
+    lat: 35.6895000,
+    lng: 139.6917100,
+  });
+};
+
+export {getFormDisable, getFormActive, resetForm};

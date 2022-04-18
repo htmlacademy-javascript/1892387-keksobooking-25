@@ -5,7 +5,7 @@ const isEscapeKey = (evt) => evt.key === 'Escape';
 const onPopupEscKeydown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    onPopupEscKeydown();
+    onPopupClick();
   }
 };
 

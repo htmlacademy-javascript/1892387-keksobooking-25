@@ -1,4 +1,4 @@
-import {createOffer} from './card_generate.js';
+import {createOffer} from './card-generate.js';
 import {mapFiltersForm, setMapFilters, filterOffers} from './filters.js';
 import {form} from './form-validator.js';
 import {getData, showError} from './api.js';
@@ -121,6 +121,12 @@ const resetMarker = () => {
 };
 
 marker.addTo(map);
+
+const getCoordinates = (lat, lng) => {
+  address.value = `${lat} ${lng}`;
+};
+
+getCoordinates(marker.getLatLng().lat.toFixed(5), marker.getLatLng().lng.toFixed(5));
 
 marker.on('drag', (evt) => {
   const coordinates = evt.target.getLatLng();

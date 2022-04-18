@@ -13,7 +13,7 @@ function onPopupClick() {
   document.querySelector('.popup').remove();
   document.removeEventListener('keydown', onPopupEscKeydown);
   document.removeEventListener('click', onPopupClick);
-};
+}
 
 const showPopup = () => {
   document.body.append(popupMessage);

@@ -1,14 +1,13 @@
-import {capacityOptions, costOptions} from './data.js';
 import {sendData} from './api.js';
-import {blockSubmitButton, unblockSubmitButton} from './util.js';
+import {blockSubmitButton, unblockSubmitButton, TypePrice} from './form.js';
 
 const form = document.querySelector('.ad-form');
-const roomNumber = form.querySelector('#room_number');
-const roomCapacity = form.querySelector('#capacity');
-const roomType = form.querySelector('#type');
-const roomCost = form.querySelector('#price');
-const timeIn = form.querySelector('#timein');
-const timeOut = form.querySelector('#timeout');
+const accommodationType = document.querySelector('#type');
+const price = document.querySelector('#price');
+const rooms = document.querySelector('#room_number');
+const guests = document.querySelector('#capacity');
+const MAX_ROOMS = 100;
+const MIN_ROOMS = 0;
 
 const pristine = new Pristine(form, {
   classTo: 'ad-form__element',
@@ -16,46 +15,14 @@ const pristine = new Pristine(form, {
   errorTextClass: 'ad-form__error-text',
 }, false);
 
-const validateRoomsAndGuests = () => capacityOptions[roomNumber.value].includes(roomCapacity.value);
-const validateCost = () => parseInt(roomCost.value, 10) >= parseInt(costOptions[roomType.value], 10);
-const getValidateCostErrorMessage = () => `Минимальная цена за данный тип жилья ${costOptions[roomType.value]}`;
+const validatePrice = () => price.value >= TypePrice[accommodationType.value];
+const validateRoomsAndGuests = () => Number(rooms.value) === MAX_ROOMS && Number(guests.value) === MIN_ROOMS || Number(guests.value) <= Number(rooms.value) && Number(rooms.value) !== MAX_ROOMS && Number(guests.value) !== MIN_ROOMS;
+const showPriceValidationError = () => `Минимальная цена должна быть больше ${TypePrice[accommodationType.value]}`;
 
-pristine.addValidator(
-  roomNumber,
-  validateRoomsAndGuests,
-  'Количество комнат должно быть меньше или равно количеству гостей'
-);
+pristine.addValidator(price, validatePrice, showPriceValidationError);
 
-pristine.addValidator(
-  roomCapacity,
-  validateRoomsAndGuests,
-  'Количество гостей должно быть меньше или равно количеству комнат'
-);
-
-function onTypeChange () {
-  roomCost.placeholder = costOptions[this.value];
-  roomCost.setAttribute('min', costOptions[this.value]);
-  pristine.validate(roomCost);
-}
-
-function onTimeInChange () {
-  timeOut.value = timeIn.value;
-}
-
-function onTimeOutChange () {
-  timeIn.value = timeOut.value;
-}
-
-timeIn.addEventListener('change', onTimeInChange);
-timeOut.addEventListener('change', onTimeOutChange);
-
-pristine.addValidator(
-  roomCost,
-  validateCost,
-  getValidateCostErrorMessage
-);
-
-roomType.addEventListener('change', onTypeChange);
+pristine.addValidator(rooms, validateRoomsAndGuests, 'Количество комнат должно быть меньше или равно количеству гостей');
+pristine.addValidator(guests, validateRoomsAndGuests, 'Количество гостей должно быть меньше или равно количеству комнат');
 
 const setUserFormSubmit = (onSuccess, onFail) => {
   form.addEventListener('submit', (evt) => {
@@ -78,4 +45,4 @@ const setUserFormSubmit = (onSuccess, onFail) => {
   });
 };
 
-export {setUserFormSubmit};
+export {setUserFormSubmit, form};

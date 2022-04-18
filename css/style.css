@@ -276,7 +276,7 @@ fieldset {
 }
 
 .ad-form-header__title {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .ad-form-header__upload {
@@ -606,6 +606,12 @@ fieldset {
 
   background-color: #e4e4de;
   border-radius: 5px;
+}
+
+.ad-form__photo img {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
 }
 
 .ad-form__element--submit {
@@ -1056,6 +1062,38 @@ fieldset {
 
 #price {
   margin-bottom: 15px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.ad-form__error-text {
+  position: absolute;
+  margin-right: 5px;
+  padding: 5px;
+  background-color: #ffffff;
+  color: tomato;
+  border: 1px solid #7e7e7e;
+  border-radius: 5px;
+  z-index: 1;
+}
+
+.ad-form__slider {
+  margin: 30px 0;
+}
+
+.ad-form__slider + .ad-form__error-text {
+  left: 0;
+  bottom: -5px;
+  width: max-content;
+}
+
+.noUi-tooltip {
+  display: none;
+}
+.noUi-active .noUi-tooltip {
+  display: block;
 }
 
 .error-container {

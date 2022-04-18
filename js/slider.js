@@ -19,4 +19,4 @@ slider.noUiSlider.on('update', (values, handle) => {
   price.value = Math.floor(values[handle]);
 });
 
-export { slider };
+export {slider};

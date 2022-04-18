@@ -1,4 +1,6 @@
-import {resetForm} from './form.js';
+import {onResetButtonClick} from './form.js';
+
+const ERROR_TIME = 5000;
 
 const getData = (onSuccess, onFail) => {
   fetch('https://25.javascript.pages.academy/keksobooking/data')
@@ -20,14 +22,26 @@ const sendData = (onSuccess, onFail, body) => {
     .then((response) => {
       if (response.ok) {
         onSuccess();
-        resetForm();
+        onResetButtonClick();
       } else {
-        onFail('Не удалось отправить форму. Попробуйте ещё раз');
+        onFail('Форма не отправлена. Попробуйте ещё раз');
       }
     })
     .catch(() => {
-      onFail('Не удалось отправить форму. Попробуйте ещё раз');
+      onFail('Форма не отправлена. Попробуйте ещё раз');
     });
 };
 
-export {getData, sendData};
+const showError = (error) => {
+  const errorContainer = document.createElement('div');
+  errorContainer.classList.add('error-container');
+  errorContainer.textContent = error;
+
+  document.body.append(errorContainer);
+
+  setTimeout(() => {
+    errorContainer.remove();
+  }, ERROR_TIME);
+};
+
+export {getData, sendData, showError};

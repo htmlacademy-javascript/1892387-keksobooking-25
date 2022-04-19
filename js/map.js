@@ -85,6 +85,12 @@ const renderMarkers = (offers) => {
     .forEach((point) => createMarker(point));
 };
 
+const getCoordinates = () => {
+  const lat = marker.getLatLng().lat.toFixed(5);
+  const lng = marker.getLatLng().lng.toFixed(5);
+  address.value = `${lat} ${lng}`;
+};
+
 const loadMap = () => {
   map.on('load', () => {
     getData((offers) => {
@@ -118,15 +124,12 @@ const resetMarker = () => {
     lat: BASIC_LAT,
     lng: BASIC_LNG,
   });
+  getCoordinates();
 };
 
 marker.addTo(map);
 
-const getCoordinates = (lat, lng) => {
-  address.value = `${lat} ${lng}`;
-};
-
-getCoordinates(marker.getLatLng().lat.toFixed(5), marker.getLatLng().lng.toFixed(5));
+getCoordinates();
 
 marker.on('drag', (evt) => {
   const coordinates = evt.target.getLatLng();
